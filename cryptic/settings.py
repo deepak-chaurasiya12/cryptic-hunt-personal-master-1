@@ -15,7 +15,7 @@ import os
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(_file_)))
 PROJECT_ROOT = BASE_DIR
 
 
@@ -23,12 +23,12 @@ PROJECT_ROOT = BASE_DIR
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '&@xiii4a-gk%paucu=s6==0#o3e%ur^t+38%y4h%4hgl4jx&k-'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", 'false').lower()=='true'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 
 # Application definition
@@ -90,7 +90,9 @@ DATABASES = {
         }
     }
 
-DATABASES['default']=dj_database_url.parse("postgres://puzzlequiz_user:l4LVx2SNjPi4lNexiFChC5bBU1fgkRm2@dpg-cljh8olae00c73869sn0-a.singapore-postgres.render.com/puzzlequiz")
+database_url = os.environ.get("DATABASE_URL")
+
+DATABASES['default']=dj_database_url.parse(database_url)
 
 
 # Password validation
@@ -140,7 +142,3 @@ LOGIN_REDIRECT_URL = '/play/'
 MEDIA_ROOT=os.path.join(BASE_DIR, 'media')
 MEDIA_URL= '/media/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-
-
-
