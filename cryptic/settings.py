@@ -11,12 +11,11 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 import dj_database_url
 import os
-from pathlib import Path
 
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(_file_)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = BASE_DIR
 
 
@@ -24,12 +23,12 @@ PROJECT_ROOT = BASE_DIR
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = '&@xiii4a-gk%paucu=s6==0#o3e%ur^t+38%y4h%4hgl4jx&k-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", 'false').lower()=='true'
+DEBUG = True
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -84,14 +83,14 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'postgres',
-        # 'USER': 'postgres',
-        # 'PASSWORD': '1234@deepak',
-        # 'HOST': 'localhost',
-        # 'PORT': '5432'
+        'USER': 'postgres',
+        'PASSWORD': '1234@deepak',
+        'HOST': 'localhost',
+        'PORT': '5432'
         }
     }
 
-database_url = os.environ.get("DATABASE_URL")
+database_url = "postgres://puzzlequiz_user:l4LVx2SNjPi4lNexiFChC5bBU1fgkRm2@dpg-cljh8olae00c73869sn0-a.singapore-postgres.render.com/puzzlequiz"
 
 DATABASES['default']=dj_database_url.parse(database_url)
 
